@@ -1,102 +1,296 @@
-### Instale as dependências com: pip install -r requirements.txt
+# Análise de Churn de Clientes
 
-# Relatório final das análise de churn
+Este projeto apresenta uma análise completa de **evasão de clientes (churn)**. O objetivo foi identificar **fatores que influenciam o cancelamento de serviços** e propor **estratégias de retenção baseadas em dados**.
 
-## 1. Introdução
+O projeto foi estruturado em duas etapas principais:
 
-Este relatório apresenta os resultados da análise de evasão de clientes (churn) utilizando diferentes modelos de aprendizado de máquina. O objetivo foi identificar os fatores mais relevantes que influenciam a saída de clientes e, a partir desses resultados, propor estratégias de retenção baseadas nos padrões encontrados nos dados.
-
-Foram utilizados diferentes modelos para análise e comparação de desempenho, incluindo regressão logística, KNN, árvore de decisão e floresta aleatória. A interpretação dos resultados foi feita com base na importância das variáveis e nos coeficientes obtidos durante o treinamento.
+1. **Análise exploratória de dados (EDA)** para identificar padrões de churn.
+2. **Modelagem preditiva com Machine Learning** para avaliar a importância das variáveis.
 
 ---
 
-## 2. Principais Fatores que Influenciam a Evasão
+# 1. Introdução
 
-Como resultados finais, observamos que os **coeficientes (features) mais importantes dentro do treinamento foram**:
+A evasão de clientes representa um dos principais desafios estratégicos para empresas de telecomunicações. A perda de clientes impacta diretamente:
 
-- **Tenure (tempo de permanência do cliente)**  
+- receita recorrente
+- previsibilidade financeira
+- custo de aquisição de novos clientes
+
+Como **reter clientes costuma ser mais barato do que adquirir novos**, compreender os fatores associados ao churn é essencial para decisões estratégicas.
+
+Este projeto utiliza **análise estatística e modelos de aprendizado de máquina** para identificar padrões de evasão e gerar insights acionáveis.
+
+---
+
+# 2. Limpeza e Tratamento de Dados
+
+Antes da análise, os dados passaram por um processo de **pré-processamento** para garantir consistência e confiabilidade.
+
+As principais etapas incluíram:
+
+- verificação de **valores ausentes**
+- remoção de **inconsistências**
+- conversão de **variáveis categóricas**
+- correção de **tipos de dados**
+- padronização de **nomes de colunas**
+
+Algumas variáveis numéricas que estavam armazenadas como texto foram convertidas para tipos adequados, garantindo maior qualidade nas análises posteriores.
+
+---
+
+# 3. Análise Exploratória de Dados (EDA)
+
+A análise exploratória foi realizada utilizando **visualizações estatísticas**, como:
+
+- histogramas
+- boxplots
+- comparações entre grupos
+
+Essa etapa permitiu identificar padrões importantes associados ao churn.
+
+---
+
+# 4. Principais Variáveis Analisadas
+
+## 4.1 Variáveis Demográficas
+
+### Gênero
+Não foram observadas diferenças relevantes entre homens e mulheres em relação à evasão.
+
+### Clientes idosos
+Clientes com mais de 65 anos apresentaram uma **tendência ligeiramente maior de churn**, porém o número reduzido de observações limita conclusões mais robustas.
+
+### Presença de parceiro(a)
+Clientes **sem parceiro(a)** apresentam aproximadamente **o dobro de churn** em comparação com clientes que possuem parceiro.
+
+### Dependentes
+Clientes **sem dependentes** apresentaram um churn aproximadamente **cinco vezes maior**, indicando um padrão significativo.
+
+---
+
+## 4.2 Serviços Contratados
+
+### Serviço telefônico
+Não foram observadas diferenças relevantes.
+
+### Serviço de internet
+Clientes que utilizam **fibra óptica** apresentaram **taxa significativamente maior de churn**.
+
+Isso pode indicar:
+
+- problemas de qualidade
+- custo elevado
+- expectativas não atendidas
+
+### Segurança online, backup e proteção de dispositivos
+
+Clientes que **não possuem esses serviços adicionais** apresentaram maior evasão.
+
+Esses serviços podem aumentar o **valor percebido** pelo cliente.
+
+### Assistência técnica
+
+A ausência de suporte técnico também mostrou associação com maior churn.
+
+### Streaming (TV e filmes)
+
+Foi observada uma **leve tendência de maior churn** entre clientes que não possuem esses serviços.
+
+---
+
+## 4.3 Contratos e Pagamentos
+
+### Tipo de contrato
+
+Clientes com **contrato mensal (Month-to-month)** apresentaram a **maior taxa de churn**.
+
+Isso sugere que a ausência de compromisso de longo prazo facilita o cancelamento.
+
+### Faturamento online
+
+Clientes que utilizam faturamento eletrônico apresentaram uma taxa maior de churn.
+
+### Cheque eletrônico
+
+O método de pagamento **electronic check** mostrou forte associação com evasão.
+
+Esse foi um dos fatores mais críticos observados.
+
+---
+
+## 4.4 Variáveis Numéricas
+
+### Tempo de permanência (Tenure)
+
+Clientes com **menor tempo de permanência** apresentam maior probabilidade de churn.
+
+Esse padrão é comum em serviços baseados em assinatura.
+
+### Gasto mensal
+
+Clientes que cancelaram tendem a apresentar **gastos mensais mais altos**.
+
+### Gasto total
+
+Clientes que evadiram possuem **menor gasto total**, consequência direta do menor tempo de permanência.
+
+---
+
+# 5. Modelagem de Machine Learning
+
+Após a análise exploratória, foram utilizados diferentes algoritmos para modelar o churn:
+
+- Regressão Logística
+- K-Nearest Neighbors (KNN)
+- Árvore de Decisão
+- Floresta Aleatória
+
+O objetivo foi comparar os modelos e identificar **quais variáveis possuem maior poder preditivo**.
+
+---
+
+# 6. Principais Fatores Identificados pelos Modelos
+
+Os fatores mais relevantes encontrados durante o treinamento foram:
+
+- **Tenure (tempo de permanência do cliente)**
 - **Uso de internet por fibra óptica**
 
-Esses resultados eram esperados, pois análises exploratórias anteriores já indicavam que clientes com **baixo tempo de permanência** apresentam maior probabilidade de evasão. Isso sugere que o período inicial da relação entre cliente e empresa é crítico para a retenção.
+Esses resultados confirmam os padrões observados na análise exploratória.
 
-Além disso, o **uso de fibra óptica** também apareceu como uma variável importante, indicando que a qualidade ou a percepção do serviço de internet pode influenciar diretamente na decisão do cliente de permanecer ou cancelar o serviço.
-
----
-
-## 3. Comparação Entre os Modelos
-
-Durante o processo de modelagem, foram avaliados diferentes algoritmos para compreender melhor o comportamento das variáveis.
-
-Os modelos baseados em árvore, como **árvore de decisão** e **floresta aleatória**, indicaram que a variável:
-
-- **Tipo de contrato mensal (Month-to-month)**
-
-possui grande relevância para prever churn.
-
-Entretanto, um resultado curioso foi observado no modelo de **regressão logística**. Apesar da relevância do contrato mensal nos modelos de árvore, essa variável se mostrou **estatisticamente irrelevante na regressão logística**, apresentando:
-### P>|z| > 0.8
-
-Esse valor indica uma **probabilidade extremamente alta de que o coeficiente seja estatisticamente insignificante**, o que sugere que essa variável não contribui para explicar o churn dentro desse modelo específico.
+Clientes que estão **nos primeiros meses de contrato apresentam maior risco de churn**.
 
 ---
 
-## 4. Interpretação dos Resultados
+# 7. Diferença Entre os Modelos
 
-Com base nos resultados obtidos, alguns padrões importantes podem ser destacados:
+Durante a modelagem, foi observado um comportamento interessante.
 
-- Clientes com **menor tempo de permanência (tenure baixo)** apresentam maior probabilidade de evasão.
-- O **serviço de fibra óptica** tem forte relação com churn, possivelmente refletindo problemas de qualidade, preço ou expectativas do cliente.
-- O **tipo de contrato mensal** parece estar associado ao churn em modelos baseados em árvore, sugerindo que clientes sem compromisso de longo prazo têm maior tendência a cancelar o serviço.
+Nos modelos baseados em árvore (**árvore de decisão e random forest**), a variável:
 
-Esses fatores indicam que tanto **a experiência inicial do cliente quanto o tipo de contrato** desempenham papéis importantes na retenção.
+**Tipo de contrato mensal**
+
+apareceu como altamente relevante para prever churn.
+
+Entretanto, no modelo de **regressão logística**, essa variável apresentou:
+
+### P>|Z| > 0.8
+
+
+Esse valor indica que o coeficiente é **estatisticamente insignificante** dentro desse modelo.
+
+Isso demonstra que **diferentes algoritmos podem interpretar as variáveis de maneiras distintas**, reforçando a importância de comparar múltiplos modelos.
 
 ---
 
-## 5. Estratégias de Retenção de Clientes
+# 8. Insights Principais
 
-Com base nos fatores identificados, algumas estratégias podem ser propostas para reduzir a evasão de clientes.
+A análise revelou três fatores principais associados à evasão:
 
-### 5.1 Benefícios para Clientes nos Primeiros Meses
+1. **Tempo de permanência baixo (tenure baixo)**
+2. **Uso de internet por fibra óptica**
+3. **Contratos mensais**
 
-Como clientes com baixo tenure apresentam maior risco de churn, uma estratégia importante seria oferecer **benefícios nos primeiros meses de serviço**, como:
+Outros fatores relevantes incluem:
+
+- pagamento por cheque eletrônico
+- ausência de serviços adicionais (backup, segurança, suporte)
+- clientes sem dependentes
+
+---
+
+# 9. Estratégias de Retenção Baseadas nos Dados
+
+Com base nos resultados obtidos, algumas estratégias podem ser implementadas.
+
+## 9.1 Foco nos primeiros meses de contrato
+
+Clientes novos apresentam maior risco de churn.
+
+Possíveis ações:
 
 - descontos iniciais
 - bônus de serviços
+- acompanhamento ativo do cliente
 - suporte prioritário
 
-Isso pode aumentar o engajamento e melhorar a experiência inicial do cliente.
+---
+
+## 9.2 Incentivo a contratos de longo prazo
+
+Oferecer:
+
+- planos anuais com desconto
+- benefícios exclusivos
+- pacotes premium
+
+Isso aumenta a previsibilidade da receita e reduz churn.
 
 ---
 
-### 5.2 Incentivo a Contratos de Longo Prazo
+## 9.3 Melhorias no serviço de fibra óptica
 
-Outra estratégia seria incentivar contratos mais longos, oferecendo:
+É importante investigar:
 
-- **pacotes anuais com preços mais baixos**
-- vantagens adicionais para contratos de maior duração
-
-Isso pode reduzir a rotatividade de clientes e aumentar a previsibilidade da receita.
-
----
-
-### 5.3 Melhoria do Serviço de Fibra Óptica
-
-Como o uso de fibra óptica aparece como um fator relevante para churn, é importante avaliar:
-
-- qualidade do serviço
 - estabilidade da conexão
-- atendimento técnico
+- qualidade do serviço
+- suporte técnico
 
-Investimentos na **melhoria da experiência com fibra óptica** podem aumentar a satisfação dos clientes que utilizam esse serviço.
+Melhorias nessa área podem aumentar a satisfação dos clientes.
 
 ---
 
-## 6. Conclusão
+## 9.4 Pacotes de serviços combinados
 
-A análise realizada permitiu identificar fatores importantes associados à evasão de clientes. Entre os principais fatores destacam-se o **tempo de permanência do cliente (tenure)** e o **uso de fibra óptica**, ambos com forte impacto nos modelos analisados.
+Combinar serviços como:
 
-Além disso, foi observado que diferentes modelos podem interpretar as variáveis de maneira distinta, como no caso do **contrato mensal**, que foi relevante para modelos baseados em árvore, mas estatisticamente insignificante na regressão logística.
+- internet
+- segurança online
+- backup
+- proteção de dispositivos
 
-Com base nesses resultados, estratégias focadas em **retenção nos primeiros meses, incentivo a contratos mais longos e melhoria na qualidade do serviço de fibra óptica** podem contribuir significativamente para reduzir a evasão de clientes.
+Isso aumenta o valor percebido pelo cliente e reduz cancelamentos.
 
-Essas ações podem melhorar a satisfação do cliente, fortalecer o relacionamento com a empresa e aumentar a retenção a longo prazo.
+---
+
+# 10. Conclusão
+
+A análise permitiu identificar fatores importantes associados à evasão de clientes em serviços de telecomunicações.
+
+Os resultados indicam que:
+
+- **clientes novos são mais propensos a cancelar**
+- **a experiência com fibra óptica é um fator relevante**
+- **contratos mensais apresentam maior rotatividade**
+
+Além disso, o uso de diferentes modelos mostrou que **a interpretação das variáveis pode variar dependendo do algoritmo**, destacando a importância da comparação entre métodos.
+
+Estratégias focadas em:
+
+- retenção nos primeiros meses
+- melhoria da experiência do cliente
+- incentivo a contratos de longo prazo
+
+podem reduzir significativamente a taxa de churn e aumentar o valor do cliente ao longo do tempo.
+
+---
+
+# Tecnologias Utilizadas
+
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- Jupyter Notebook
+
+---
+
+# Instalação
+
+Instale as dependências com:
+
+```bash
+pip install -r requirements.txt
